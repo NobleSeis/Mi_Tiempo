@@ -1,0 +1,15 @@
+/* Reset css */
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background: #063588;
+  background: linear-gradient(0deg, #063588, #9ecef5);
+  background-attachment: fixed;
+  color: white
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
