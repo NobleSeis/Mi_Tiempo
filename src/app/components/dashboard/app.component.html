@@ -1,4 +1,14 @@
-<div class="container">
+<div *ngIf="isLoading" class="loader">
+  <p
+    class="justify-content-center h-50 d-flex align-items-center display-4"
+    style="
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    "
+  >
+    Cargando...
+  </p>
+</div>
+<div *ngIf="!isLoading" class="container">
   <p class="display-3 text-center pt-5">
     {{ data.location.name }} <mat-icon>place</mat-icon>
   </p>

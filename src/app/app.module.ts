@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/dashboard/app.component';
 
 @NgModule({
   declarations: [AppComponent],

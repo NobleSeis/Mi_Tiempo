@@ -5,11 +5,17 @@
 }
 
 body {
-  background: #063588;
   background: linear-gradient(0deg, #063588, #9ecef5);
+  background-size: cover;
   background-attachment: fixed;
-  color: white
+  color: white;
+  border-bottom: 1px solid transparent;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html{ height: 100%;}
+body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.scrollable-content {
+  height: 100%;
+  overflow-y: scroll;
+}

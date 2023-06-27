@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, switchMap } from 'rxjs';
 
-import { Weather } from './models/weather';
-import { WeatherService } from './servicios/weather-service.service';
-import { IpService } from './servicios/ip.service';
+import { Weather } from 'src/app/models/weather';
+import { IpService } from 'src/app/servicios/ip.service';
+import { WeatherService } from 'src/app/servicios/weather-service.service';
 
 @Component({
   selector: 'app-root',
