@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherService } from './servicios/weather-service.service';
-import { finalize } from 'rxjs';
+import { finalize, switchMap } from 'rxjs';
+
 import { Weather } from './models/weather';
+import { WeatherService } from './servicios/weather-service.service';
+import { IpService } from './servicios/ip.service';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +15,20 @@ export class AppComponent implements OnInit {
   data: Weather = new Weather();
   isLoading = false;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private ipService: IpService
+  ) {}
   ngOnInit(): void {
     this.isLoading = true;
-    this.weatherService
-      .getWeatherForecast('Fuente palmera', '3', 'yes')
-      .pipe(finalize(() => (this.isLoading = false)))
+    this.ipService
+      .getIp()
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        switchMap((data: { ip: string }) =>
+          this.weatherService.getWeatherForecast(data.ip, '3', 'yes')
+        )
+      )
       .subscribe((data) => (this.data = data));
   }
 }
