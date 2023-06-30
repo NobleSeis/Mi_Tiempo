@@ -17,8 +17,13 @@ html, body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", san
 .scrollable-content {
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.mat-icon {
+  vertical-align: middle;
 }

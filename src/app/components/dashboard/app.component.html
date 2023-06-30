@@ -8,125 +8,136 @@
     Cargando...
   </p>
 </div>
-<div *ngIf="!isLoading" class="container">
-  <p class="display-3 text-center pt-5">
-    {{ data.location.name }} <mat-icon>place</mat-icon>
-  </p>
 
-  <p class="display-1 text-center temp">
-    {{ data.current.temp_c | number : "1.0-0" }}°
-  </p>
-
-  <div
-    class="custom-card rounded p-3 d-flex align-items-center justify-content-center text-center"
-  >
-    <div class="w-50">
-      <img
-        class="w-100 large-icon"
-        src="{{ data.current.condition.icon }}"
-        alt="{{ data.current.condition.text }}"
-      />
-    </div>
-    <div>
-      <p class="display-4 text-center">{{ data.current.condition.text }}</p>
-      <p class="d-flex align-items-center justify-content-center text-center">
-        <mat-icon class="">thermostat</mat-icon>
-        {{ data.forecast.forecastday[0].day.mintemp_c | number : "1.0-0" }}° /
-        {{ data.forecast.forecastday[0].day.maxtemp_c | number : "1.0-0" }}°
+<div class="row">
+  <div class="col-md-4 offset-md-4 justify-content-center">
+    <div *ngIf="!isLoading" class="mx-auto">
+      <!-- Place -->
+      <p class="display-3 text-center pt-5">
+        {{ data.location.name }}
+        <mat-icon style="transform: scale(2)">place</mat-icon>
       </p>
-    </div>
-  </div>
 
-  <div
-    *ngIf="data.alerts && data.alerts.alert.length > 0"
-    class="custom-card rounded p-3 mt-3"
-  >
-    <div class="row p-3">
-      <div class="col-2 d-flex justify-content-center align-items-center">
-        <mat-icon style="transform: scale(2)">warning_amber</mat-icon>
-      </div>
-      <div class="col-10">
-        <span>
-          {{ data.alerts.alert[0].headline }}.
-          {{ data.alerts.alert[0].category }}
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="row flex-row flex-nowrap overflow-auto mx-auto mt-3 gap-1 nobar">
-    <div *ngFor="let hour of hours" class="col-4 custom-card text-center p-3">
-      <span class="lead">{{ hour.time | date : "HH:mm" }}</span>
-      <img src="{{ hour.condition.icon }}" class="mx-auto mb-2" />
-
-      <div>
-        <p class="d-flex align-items-center">
-          <mat-icon>thermostat</mat-icon>
-          {{ hour.temp_c | number : "1.0-0" }}°
-          <mat-icon>umbrella</mat-icon>
-          {{ hour.chance_of_rain }}%
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row p-3">
-    <div class="p-4 custom-card rounded text-center">
-      <mat-icon class="mx-auto d-block">wb_twilight</mat-icon>
-      <!-- Comprobar con fecha actual para saber si mostrar el dia actual o mañana -->
-      <p>Amanecer {{ data.forecast.forecastday[1].astro.sunrise }}</p>
-      <hr />
-      <mat-icon class="mx-auto d-block">wb_twilight</mat-icon>
-      <p>Atardecer {{ data.forecast.forecastday[0].astro.sunset }}</p>
-    </div>
-  </div>
-
-  <div class="row row-cols-2 p-4 custom-card rounded mx-1">
-    <div>
-      <div class="d-flex align-items-center justify-content-center">
-        <mat-icon style="margin-right: 5px">water_drop</mat-icon>
-        <span>Humedad </span>
-      </div>
-      <p class="text-center">{{ data.current.humidity }}%</p>
-      <hr />
-    </div>
-
-    <div>
-      <div class="d-flex align-items-center justify-content-center">
-        <mat-icon>thermostat</mat-icon>
-        <span> S. termica </span>
-      </div>
-      <p class="text-center">
-        {{ data.current.feelslike_c | number : "1.0-0" }}°
+      <!-- Temperature -->
+      <p class="display-1 text-center temp">
+        {{ data.current.temp_c | number : "1.0-0" }}°
       </p>
-      <hr />
-    </div>
-    <div>
-      <div class="d-flex align-items-center justify-content-center">
-        <mat-icon style="margin-right: 5px">flare</mat-icon>
-        <span>UV</span>
+
+      <!-- Current weather -->
+      <div class="custom-card rounded p-3 justify-content-center text-center">
+        <img
+          class="p-5 large-icon"
+          src="{{ data.current.condition.icon }}"
+          alt="{{ data.current.condition.text }}"
+        />
+        <div>
+          <p class="display-4 text-center">{{ data.current.condition.text }}</p>
+          <p
+            class="d-flex align-items-center justify-content-center text-center"
+          >
+            <mat-icon class="">thermostat</mat-icon>
+            {{ data.forecast.forecastday[0].day.mintemp_c | number : "1.0-0" }}°
+            /
+            {{ data.forecast.forecastday[0].day.maxtemp_c | number : "1.0-0" }}°
+          </p>
+        </div>
       </div>
-      <p class="text-center">
-        {{ data.current.uv }}
-      </p>
-      <hr />
-    </div>
-    <div>
-      <div class="d-flex align-items-center justify-content-center">
-        <mat-icon style="margin-right: 5px">heat_pump</mat-icon>
-        <span>Presión</span>
+
+      <!-- Alerts -->
+      <div
+        *ngIf="data.alerts && data.alerts.alert.length > 0"
+        class="custom-card rounded p-3 mt-3"
+      >
+        <div class="row p-3">
+          <div class="col-2 d-flex justify-content-center align-items-center">
+            <mat-icon style="transform: scale(2)">warning_amber</mat-icon>
+          </div>
+          <div class="col-10">
+            <span>
+              {{ data.alerts.alert[0].headline }}.
+              {{ data.alerts.alert[0].category }}
+            </span>
+          </div>
+        </div>
       </div>
-      <p class="text-center">{{ data.current.pressure_mb }}mbar</p>
-      <hr />
-    </div>
-    <div class="col-12">
-      <div class="d-flex align-items-center justify-content-center">
-        <mat-icon style="margin-right: 5px">shower</mat-icon>
-        <span> Probabilidad de lluvia </span>
+
+      <!-- Hour by hour -->
+      <div
+        class="row flex-row flex-nowrap overflow-auto mx-auto mt-3 gap-1 nobar"
+      >
+        <div
+          *ngFor="let hour of hours"
+          class="col-4 rounded custom-card text-center p-3 justify-content-center"
+        >
+          <div class="lead text-center">{{ hour.time | date : "HH:mm" }}</div>
+          <img src="{{ hour.condition.icon }}" class="mx-auto mb-2" />
+
+          <div>
+            <mat-icon>thermostat</mat-icon>{{ hour.temp_c | number : "1.0-0" }}°
+          </div>
+          <div><mat-icon>shower</mat-icon>{{ hour.chance_of_rain }}%</div>
+        </div>
       </div>
-      <p class="text-center">
-        {{ data.forecast.forecastday[0].day.daily_chance_of_rain }}%
-      </p>
+
+      <div class="row p-3">
+        <div class="p-4 custom-card rounded text-center">
+          <mat-icon class="mx-auto d-block">wb_twilight</mat-icon>
+          <!-- Comprobar con fecha actual para saber si mostrar el dia actual o mañana -->
+          <p>Amanecer {{ data.forecast.forecastday[1].astro.sunrise }}</p>
+          <hr />
+          <mat-icon class="mx-auto d-block">wb_twilight</mat-icon>
+          <p>Atardecer {{ data.forecast.forecastday[0].astro.sunset }}</p>
+        </div>
+      </div>
+
+      <div class="row row-cols-2 p-4 custom-card rounded mx-1">
+        <div>
+          <div class="d-flex align-items-center justify-content-center">
+            <mat-icon style="margin-right: 5px">water_drop</mat-icon>
+            <span>Humedad </span>
+          </div>
+          <p class="text-center">{{ data.current.humidity }}%</p>
+          <hr />
+        </div>
+
+        <div>
+          <div class="d-flex align-items-center justify-content-center">
+            <mat-icon>thermostat</mat-icon>
+            <span> S. termica </span>
+          </div>
+          <p class="text-center">
+            {{ data.current.feelslike_c | number : "1.0-0" }}°
+          </p>
+          <hr />
+        </div>
+        <div>
+          <div class="d-flex align-items-center justify-content-center">
+            <mat-icon style="margin-right: 5px">flare</mat-icon>
+            <span>UV</span>
+          </div>
+          <p class="text-center">
+            {{ data.current.uv }}
+          </p>
+          <hr />
+        </div>
+        <div>
+          <div class="d-flex align-items-center justify-content-center">
+            <mat-icon style="margin-right: 5px">heat_pump</mat-icon>
+            <span>Presión</span>
+          </div>
+          <p class="text-center">{{ data.current.pressure_mb }}mbar</p>
+          <hr />
+        </div>
+        <div class="col-12">
+          <div class="d-flex align-items-center justify-content-center">
+            <mat-icon style="margin-right: 5px">shower</mat-icon>
+            <span> Probabilidad de lluvia </span>
+          </div>
+          <p class="text-center">
+            {{ data.forecast.forecastday[0].day.daily_chance_of_rain }}%
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
