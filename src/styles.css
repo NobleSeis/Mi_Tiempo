@@ -12,10 +12,13 @@ body {
   border-bottom: 1px solid transparent;
 }
 
-html{ height: 100%;}
-body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .scrollable-content {
   height: 100%;
   overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
