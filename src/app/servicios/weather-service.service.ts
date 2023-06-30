@@ -14,7 +14,7 @@ export class WeatherService {
     alerts: string
   ): Observable<any> {
     return this.http.get(
-      `http://api.weatherapi.com/v1/forecast.json?key=4ed89c8c6a3d4799b92173840232206&q=${location}&days=${days}&aqi=no&alerts=${alerts}`
+      `https://api.weatherapi.com/v1/forecast.json?key=4ed89c8c6a3d4799b92173840232206&q=${location}&days=${days}&aqi=no&alerts=${alerts}`
     );
   }
 }

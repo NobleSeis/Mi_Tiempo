@@ -54,17 +54,20 @@
     </div>
   </div>
 
-  <div
-    class="row flex-row flex-nowrap overflow-auto mx-auto mt-3 gx-3 nobar"
-    style="height: 20vh"
-  >
-    <div class="col-4 custom-card">Content</div>
-    <div class="col-4 custom-card">Content</div>
-    <div class="col-4 custom-card">Content</div>
-    <div class="col-4 custom-card">Content</div>
-    <div class="col-4 custom-card">Content</div>
-    <div class="col-4 custom-card">Content</div>
-    <div class="col-4 custom-card">Content</div>
+  <div class="row flex-row flex-nowrap overflow-auto mx-auto mt-3 gap-1 nobar">
+    <div *ngFor="let hour of hours" class="col-4 custom-card text-center p-3">
+      <span class="lead">{{ hour.time | date : "HH:mm" }}</span>
+      <img src="{{ hour.condition.icon }}" class="mx-auto mb-2" />
+
+      <div>
+        <p class="d-flex align-items-center">
+          <mat-icon>thermostat</mat-icon>
+          {{ hour.temp_c | number : "1.0-0" }}°
+          <mat-icon>umbrella</mat-icon>
+          {{ hour.chance_of_rain }}%
+        </p>
+      </div>
+    </div>
   </div>
 
   <div class="row p-3">
