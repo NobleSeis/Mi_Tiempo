@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
         this.loadData(
           `${success.coords.latitude} ${success.coords.longitude}`,
           '7',
-          'no'
+          'yes'
         );
       },
       (error) => {
